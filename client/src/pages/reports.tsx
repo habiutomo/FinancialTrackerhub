@@ -48,6 +48,19 @@ export default function Reports() {
   
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#9146FF", "#FF4D4D"];
   
+  // Custom formatter functions for tooltips
+  const documentTooltipFormatter = (value: any) => {
+    return [`${value} dokumen`, 'Jumlah'];
+  };
+
+  const valueTooltipFormatter = (value: any) => {
+    return [formatRupiah(value), 'Nilai'];
+  };
+
+  const rupliahTickFormatter = (value: any) => {
+    return formatRupiah(value).slice(0, -6) + ' Jt';
+  };
+  
   return (
     <div className="p-6">
       <div className="mb-6">
@@ -171,13 +184,13 @@ export default function Reports() {
                           outerRadius={100}
                           fill="#8884d8"
                           dataKey="value"
-                          label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                          label={({ name, percent }: any) => `${name}: ${(percent * 100).toFixed(0)}%`}
                         >
                           {prStatusData.map((entry, index) => (
                             <Cell key={`cell-${index}`} fill={entry.color} />
                           ))}
                         </Pie>
-                        <Tooltip formatter={(value) => [`${value} dokumen`, 'Jumlah']} />
+                        <Tooltip formatter={documentTooltipFormatter} />
                         <Legend />
                       </PieChart>
                     </ResponsiveContainer>
@@ -202,13 +215,13 @@ export default function Reports() {
                           outerRadius={100}
                           fill="#8884d8"
                           dataKey="value"
-                          label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                          label={({ name, percent }: any) => `${name}: ${(percent * 100).toFixed(0)}%`}
                         >
                           {prDepartmentData.map((entry, index) => (
                             <Cell key={`cell-${index}`} fill={entry.color} />
                           ))}
                         </Pie>
-                        <Tooltip formatter={(value) => [`${value} dokumen`, 'Jumlah']} />
+                        <Tooltip formatter={documentTooltipFormatter} />
                         <Legend />
                       </PieChart>
                     </ResponsiveContainer>
@@ -230,8 +243,8 @@ export default function Reports() {
                       >
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="name" />
-                        <YAxis tickFormatter={(value) => formatRupiah(value).slice(0, -6) + ' Jt'} />
-                        <Tooltip formatter={(value) => [formatRupiah(value), 'Nilai']} />
+                        <YAxis tickFormatter={rupliahTickFormatter} />
+                        <Tooltip formatter={valueTooltipFormatter} />
                         <Legend />
                         <Bar dataKey="value" name="Nilai" fill="#4f46e5" />
                       </BarChart>
@@ -317,13 +330,13 @@ export default function Reports() {
                           outerRadius={100}
                           fill="#8884d8"
                           dataKey="value"
-                          label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                          label={({ name, percent }: any) => `${name}: ${(percent * 100).toFixed(0)}%`}
                         >
                           {prStatusData.map((entry, index) => (
                             <Cell key={`cell-${index}`} fill={entry.color} />
                           ))}
                         </Pie>
-                        <Tooltip formatter={(value) => [`${value} dokumen`, 'Jumlah']} />
+                        <Tooltip formatter={documentTooltipFormatter} />
                         <Legend />
                       </PieChart>
                     </ResponsiveContainer>
@@ -348,13 +361,13 @@ export default function Reports() {
                           outerRadius={100}
                           fill="#8884d8"
                           dataKey="value"
-                          label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                          label={({ name, percent }: any) => `${name}: ${(percent * 100).toFixed(0)}%`}
                         >
                           {prDepartmentData.map((entry, index) => (
                             <Cell key={`cell-${index}`} fill={entry.color} />
                           ))}
                         </Pie>
-                        <Tooltip formatter={(value) => [`${value} dokumen`, 'Jumlah']} />
+                        <Tooltip formatter={documentTooltipFormatter} />
                         <Legend />
                       </PieChart>
                     </ResponsiveContainer>

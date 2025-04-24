@@ -16,7 +16,9 @@ import {
   PlusSquare,
   Database,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  CheckSquare,
+  BarChart3
 } from "lucide-react";
 
 export default function Sidebar() {
@@ -36,6 +38,8 @@ export default function Sidebar() {
         { label: "Good Receive", href: "/gr", icon: <Package size={20} /> },
         { label: "Invoice", href: "/invoice", icon: <Receipt size={20} /> },
         { label: "DAV", href: "/dav", icon: <CreditCard size={20} /> },
+        { label: "Approvals", href: "/approvals", icon: <CheckSquare size={20} /> },
+        { label: "Reports", href: "/reports", icon: <BarChart3 size={20} /> },
       ]
     },
     {
