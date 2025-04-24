@@ -14,6 +14,13 @@ import POList from "@/pages/po/index";
 import PODetail from "@/pages/po/[id]";
 import GRList from "@/pages/gr/index";
 import GRDetail from "@/pages/gr/[id]";
+import FormCreate from "@/pages/form-create";
+import MasterData from "@/pages/master-data";
+import Bidding from "@/pages/bidding";
+import Invoice from "@/pages/invoice";
+import DAV from "@/pages/dav";
+import Approvals from "@/pages/approvals";
+import Reports from "@/pages/reports";
 
 function Router() {
   return (
@@ -30,6 +37,13 @@ function Router() {
             <Route path="/po/:id" component={PODetail} />
             <Route path="/gr" component={GRList} />
             <Route path="/gr/:id" component={GRDetail} />
+            <Route path="/form-create" component={FormCreate} />
+            <Route path="/master-data" component={MasterData} />
+            <Route path="/bidding" component={Bidding} />
+            <Route path="/invoice" component={Invoice} />
+            <Route path="/dav" component={DAV} />
+            <Route path="/approvals" component={Approvals} />
+            <Route path="/reports" component={Reports} />
             <Route component={NotFound} />
           </Switch>
         </div>
