@@ -14,7 +14,9 @@ import {
   Store,
   Building2,
   PlusSquare,
-  Database
+  Database,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
 
 export default function Sidebar() {
@@ -49,61 +51,88 @@ export default function Sidebar() {
 
   return (
     <aside className={cn(
-      "bg-white shadow-md z-10 transition-all duration-300 ease-in-out",
-      collapsed ? "w-16" : "w-64"
+      "bg-[#1e2a4a] text-white h-screen flex flex-col transition-all duration-300 ease-in-out",
+      collapsed ? "w-20" : "w-72"
     )}>
-      <div className="flex items-center p-4 border-b border-gray-200">
-        <div className="w-8 h-8 rounded-md bg-primary flex items-center justify-center text-white mr-2">
+      {/* Logo and App Title */}
+      <div className="flex items-center p-4 border-b border-gray-700">
+        <div className="w-10 h-10 rounded-md bg-blue-500 flex items-center justify-center text-white mr-3">
           <ShoppingCart size={20} />
         </div>
-        {!collapsed && <h1 className="text-lg font-medium">Procurement System</h1>}
+        {!collapsed && (
+          <div>
+            <h1 className="text-lg font-semibold text-white">Procurement</h1>
+            <p className="text-xs text-blue-300">PT Gunung Bara Utama</p>
+          </div>
+        )}
         <button 
-          className="ml-auto text-gray-500 hover:text-gray-700"
+          className="ml-auto bg-blue-600 hover:bg-blue-700 rounded-full p-1 text-white transition-colors"
           onClick={() => setCollapsed(!collapsed)}
         >
-          {collapsed ? "→" : "←"}
+          {collapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
         </button>
       </div>
       
-      <nav className="py-4">
+      {/* Navigation Menu */}
+      <nav className="py-4 flex-1 overflow-y-auto scrollbar-thin">
         {menuItems.map((section, i) => (
-          <div key={i} className="mb-4">
+          <div key={i} className="mb-6">
             {!collapsed && (
-              <div className="px-4 pb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+              <div className="px-6 pb-2 text-xs font-semibold text-blue-300 uppercase tracking-wider">
                 {section.section}
               </div>
             )}
             
-            {section.items.map((item, j) => {
-              const isActive = item.href === location || 
-                (item.href !== "/" && location.startsWith(item.href));
-              
-              return (
-                <Link href={item.href} key={j}>
-                  <a className={cn(
-                    "flex items-center px-4 py-3 hover:bg-gray-100 cursor-pointer",
-                    isActive ? "border-l-4 border-primary bg-blue-50" : ""
-                  )}>
-                    <span className={cn(
-                      "mr-3",
-                      isActive ? "text-primary" : "text-gray-600"
-                    )}>
-                      {item.icon}
-                    </span>
-                    {!collapsed && (
-                      <span className={cn(
-                        isActive ? "text-primary font-medium" : ""
+            <div className="space-y-1">
+              {section.items.map((item, j) => {
+                const isActive = item.href === location || 
+                  (item.href !== "/" && location.startsWith(item.href));
+                
+                return (
+                  <div key={j} className="px-3">
+                    <Link href={item.href}>
+                      <div className={cn(
+                        "flex items-center rounded-lg px-3 py-2.5 cursor-pointer",
+                        isActive 
+                          ? "bg-blue-700 text-white" 
+                          : "text-gray-300 hover:bg-[#263457] hover:text-white"
                       )}>
-                        {item.label}
-                      </span>
-                    )}
-                  </a>
-                </Link>
-              );
-            })}
+                        <span className={cn(
+                          "flex-shrink-0",
+                          collapsed ? "mx-auto" : "mr-3"
+                        )}>
+                          {item.icon}
+                        </span>
+                        {!collapsed && (
+                          <span className="text-sm font-medium">
+                            {item.label}
+                          </span>
+                        )}
+                      </div>
+                    </Link>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         ))}
       </nav>
+      
+      {/* User Profile */}
+      <div className={cn(
+        "p-4 border-t border-gray-700 mt-auto flex items-center",
+        collapsed ? "justify-center" : "justify-start"
+      )}>
+        <div className="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center text-white font-medium">
+          AD
+        </div>
+        {!collapsed && (
+          <div className="ml-3">
+            <p className="text-sm font-medium">Admin User</p>
+            <p className="text-xs text-gray-400">Procurement Dept</p>
+          </div>
+        )}
+      </div>
     </aside>
   );
 }
